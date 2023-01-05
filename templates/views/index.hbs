@@ -1,15 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>   
+
+<head>
     <link rel="stylesheet" href="css/style.css">
     <script src="js/js.js"></script>
     <title>{{title}}</title>
 </head>
+
 <body>
-    <h1>About {{name}}<h1>
+   {{>header}}
+
+    <i>{{name}}</i>
+
+    <br>
 
     <img src="img/alcie.jpg" alt="alice">
-    <hr>
-    <i>Created by {{copyright}}</i>
+
+    {{>footer}}
 </body>
+
 </html>

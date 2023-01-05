@@ -1,11 +1,11 @@
 h1 {
-   color: red;
-}
-
-i {
-   color: blueviolet;
+   color: rgb(47, 0, 255);
 }
 
 img {
    width: 350px;
+}
+
+footer {
+   text-align: center;
 }
