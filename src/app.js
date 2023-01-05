@@ -1,17 +1,23 @@
 const path = require("path")
 const express = require("express");
 
-// console.log('__dirname :>> ', __dirname); // ../src
-// console.log('__filename :>> ', __filename); // ../src/app.js
-// console.log(path.join(__dirname, "../.."))
-
 const app = express()
 const port = 3000
+
+
+// Define path for express config
 const publicDirPath = path.join(__dirname, "../public")
+const viewsPath = path.join(__dirname, "templates")
 
 
-app.set("view engine", "hbs") // setup "Handlebars templates" (create dynamic pages - reuse code (<footer>, <header>))
+// setup "Handlebars templates" (create dynamic pages - reuse code (<footer>, <header>))
+app.set("view engine", "hbs")
+app.set("views", viewsPath)
+
+
+// setup static directory to serve
 app.use(express.static(publicDirPath))
+
 
 app.get("", (req, res) => {
     res.render("index", {
