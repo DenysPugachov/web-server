@@ -1,6 +1,7 @@
 const path = require("path")
 const express = require("express");
-const hbs = require("hbs")
+const hbs = require("hbs");
+const { runInNewContext } = require("vm");
 
 const app = express()
 const port = 3000
@@ -45,11 +46,29 @@ app.get("/help", (req, res) => {
 })
 
 app.get("/weather", (req, res) => {
+    if (!req.query.address) {
+        return res.send({
+            error: "Your must provide a location address."
+        })
+    }
+
     res.send([{
-        "latitude": "51.3333",
-        "longitude": "17.0000",
-        "location": "Wroclaw",
+        forecast: "It's sunny, 9 degree out there.",
+        "location": req.query.address,
     },])
+})
+
+app.get("/products", (req, res) => {
+    //add query string >> ?search=games&ratings=5
+    if (!req.query.search) {
+        return res.send({
+            error: "You must provide a search term."
+        })
+    }
+    console.log(req.query);
+    res.send({
+        products: req.query
+    })
 })
 
 app.get("*", (req, res) => {
