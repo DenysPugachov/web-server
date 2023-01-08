@@ -24,7 +24,7 @@ app.use(express.static(publicDirPath))
 app.get("", (req, res) => {
     res.render("index", {
         "title": "Weather main page",
-        "name": "Alice"
+        "location": "Wroclaw"
     })
 })
 
@@ -51,6 +51,14 @@ app.get("/weather", (req, res) => {
         "location": "Wroclaw",
     },])
 })
+
+app.get("*", (req, res) => {
+    res.render("404", {
+        "title": "Page not found.",
+        "errorCode": "404"
+    })
+})
+
 
 app.listen(port, () => {
     console.log(`Server is listening on port ${port}...`);
