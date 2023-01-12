@@ -1,6 +1,3 @@
-
-
-
 const request = require("request")
 
 // callback(error, wetherInfoObj)
@@ -15,11 +12,9 @@ const forecast = (lat, lon, callback) => {
         } else if (body.error) {
             callback('Error :>> ', body.error.info, undefined)
         } else {
-            const { temperature, feelslike } = body.current
+            // const { temperature, feelslike } = body.current
             callback(undefined, {
-                temperature,
-                feelslike
-                // body
+                forecastData: body
             })
         }
     })

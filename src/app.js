@@ -1,6 +1,8 @@
 const path = require("path")
 const express = require("express");
 const hbs = require("hbs");
+const forecast = require("./utils/forecast")
+const geocode = require("./utils/geocode")
 
 const app = express()
 const port = 3000
@@ -45,16 +47,45 @@ app.get("/help", (req, res) => {
 })
 
 app.get("/weather", (req, res) => {
-    if (!req.query.address) {
+    const { address } = req.query
+
+    if (!address) {
         return res.send({
             error: "Your must provide a location address."
         })
     }
 
-    res.send([{
-        forecast: "It's sunny, 9 degree out there.",
-        "location": req.query.address,
-    },])
+    //use addres to geocode(address, cb(err, {data}))
+    geocode(address, (error, { latitude, longitude, location } = {}) => {
+        if (error) {
+            return res.send({
+                error
+            })
+        }
+
+        forecast(latitude, longitude, (error, data) => {
+            if (error) {
+                return res.send({
+                    error
+                })
+            }
+
+            const { weather_descriptions, feelslike, wind_speed, temperature, observation_time } = data.forecastData
+
+            res.send([{
+                // forecast: `It is currently in ${forecastData.body.location.name} ${data.temperature} degrees out. \nIt is fillslike ${data.feelslike} out there.`,
+                address,
+                "location": `${data.forecastData.location.name}, ${data.forecastData.location.timezone_id} `,
+                "forecast": `It's currently ${weather_descriptions}, 
+                    feelslike: ${feelslike},
+                    wind speed: ${wind_speed},
+                    temperature: ${temperature},
+                    time: ${observation_time}`,
+            },])
+        })
+    })
+
+
 })
 
 app.get("/products", (req, res) => {
