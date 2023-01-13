@@ -70,12 +70,12 @@ app.get("/weather", (req, res) => {
                 })
             }
 
-            const { weather_descriptions, feelslike, wind_speed, temperature, observation_time } = data.forecastData
-
+            const { weather_descriptions, feelslike, wind_speed, temperature, observation_time } = data.forecastData.current
+            console.log('data :>> ', data);
             res.send([{
                 // forecast: `It is currently in ${forecastData.body.location.name} ${data.temperature} degrees out. \nIt is fillslike ${data.feelslike} out there.`,
-                address,
-                "location": `${data.forecastData.location.name}, ${data.forecastData.location.timezone_id} `,
+                location,
+                "address": `${data.forecastData.location.name}, ${data.forecastData.location.timezone_id} `,
                 "forecast": `It's currently ${weather_descriptions}, 
                     feelslike: ${feelslike},
                     wind speed: ${wind_speed},
