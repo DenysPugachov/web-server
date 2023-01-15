@@ -1,7 +1,6 @@
 /*
 return lat, lon of given address:string
 */
-
 const request = require("request")
 
 const geocode = (address, callback) => {
