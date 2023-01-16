@@ -3,17 +3,24 @@
 
 <head>
     <link rel="stylesheet" href="css/style.css">
-    <script src="js/js.js"></script>
     <title>Weather</title>
 </head>
 
 <body>
     <div class="main-content">
+
         {{>header}}
-        <i>{{location}}</i>
+
+        <form>
+            <input type="text" placeholder="Location" required="required" autofocus="true">
+            <button>Search</button>
+        </form>
+
     </div>
 
     {{>footer}}
+
+    <script src="js/js.js"></script>
 </body>
 
 </html>
