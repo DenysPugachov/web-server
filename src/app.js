@@ -5,7 +5,7 @@ const forecast = require("./utils/forecast")
 const geocode = require("./utils/geocode")
 
 const app = express()
-const port = 3000
+const port = process.env.PORT || 3000
 
 
 // Define path for express config
@@ -71,7 +71,6 @@ app.get("/weather", (req, res) => {
             }
 
             const { weather_descriptions, feelslike, wind_speed, temperature, observation_time } = data.forecastData.current
-            console.log('data :>> ', data);
             res.send([{
                 // forecast: `It is currently in ${forecastData.body.location.name} ${data.temperature} degrees out. \nIt is fillslike ${data.feelslike} out there.`,
                 location,

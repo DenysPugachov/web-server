@@ -12,7 +12,7 @@ weatherForm.addEventListener("submit", e => {
     messageTwo.style.color = "black"
     messageTwo.textContent = ""
 
-    fetch(`http://localhost:3000/weather?address=${searchText}`).then(response => {
+    fetch(`/weather?address=${searchText}`).then(response => {
         response.json().then(data => {
             if (data.error) {
                 messageOne.textContent = ""
